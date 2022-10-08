@@ -1,0 +1,204 @@
+.display-block{
+  display:block !important;
+}
+.display-none{
+  display:none !important;
+}
+.location-button{
+  position: relative;
+  padding:2px;
+}
+
+.form-page {
+    width:90%;
+   
+  }
+  .app-header{
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .form {
+    position: relative;
+    z-index: 1;
+    padding: 45px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  }
+  
+  .form .button {
+    font-family: "Roboto", sans-serif;
+    border-radius:10px;
+    font-weight: 500;
+    letter-spacing:0.5rem;
+    text-transform: uppercase;
+    outline: 0;
+    background-color: #328f8a;
+    width: 100%;
+    border: 0;
+    letter-spacing: 1.5;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    margin-top: 5px;
+    cursor: pointer;
+    border: 1px solid #0099cc;
+    margin: 20px auto;
+  }
+  .form .button:hover {
+    border: 1px solid #0099cc;
+    background-color: #00aacc;
+    color: #ffffff;
+  }
+  
+  .form .button:disabled,
+  .button[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
+  
+  @media screen and (min-width:1700px) {
+    .form{
+      width: 400px;
+      padding: 60px;
+      font-size: 2rem;
+    }
+    .login-header{
+      font-size: 2rem;
+    }
+    .form .button{
+      font-size: 1.5rem;
+      padding:25px;
+    }
+    .form [type="checkbox"]{
+      width:20px;
+      margin:5px;
+      height:20px;
+    }
+  }
+  .react-datepicker-wrapper{
+    display: block !important;
+  }
+  .loader{
+    text-align: center;
+    padding:5px;
+    margin-top: 20px;
+  }
+  @media screen and (max-width:1120px) {
+    .form-page{
+      width:100%;
+    }
+  }
+  /* <div className='form-page'>
+        <div className="form">
+            <div class="app-header">
+                HexGrid <img style={{height:'1.4rem',width:'1.4rem'}} src={Hexagon} alt=''/>
+            </div>
+          <form>
+            <div className='row'>
+            <div className='col-sm'>
+            <div className='form-group'>
+            <label className="form-label mt-4" for="radius">Enter Radius</label>
+              <input 
+              type="text" 
+              name='radius' 
+              value={radius} 
+              onChange={handleInput} 
+              className={`form-control ${validRadius?'':'is-invalid'}`}
+              id="radius" />
+              {validRadius?'':<div className="invalid-feedback">Radius must be greater than 0</div>}
+            </div>
+             <div className='form-group'>
+              <label for='method' className='form-label mt-4'>Select Method</label>
+              <select className='form-select' id='method' name='method' onChange={handleInput}>
+                <option value='1'>Pearson</option>
+                <option value='2'>Kendall</option>
+                <option value='3'>Spearman</option>
+                <option value='4'>Other method</option>
+              </select>
+            </div>
+            </div>
+          </div>
+          <div className='row'>
+          <div className='col-sm'>
+          <div className='form-group'>
+            <label className="form-label mt-4" for="radius">Enter Latitude</label>
+              <input 
+              type="text" 
+              name='lat' 
+              value={lat} 
+              onChange={handleInput} 
+              className={`form-control ${validLat?'':'is-invalid'}`}
+              id="lat" />
+              {validLat?'':<div className="invalid-feedback">Latitudes must be within -90 to +90</div>}
+            </div>
+            <div className='form-group'>
+            <label className="form-label mt-4" for="lng">Enter Longitude</label>
+              <input 
+              type="text" 
+              name='lng' 
+              value={lng} 
+              onChange={handleInput} 
+              className={`form-control ${validLng?'':'is-invalid'}`}
+              id="lng" />
+              {validLng?'':<div className="invalid-feedback">Longitudes must be within -180 to 180</div>}
+              <div className='location-button'>
+                <LocationOnIcon onClick={()=>myLocation()} style={{cursor:'pointer'}} />
+                Click to set current location
+              </div>
+            </div>
+            </div>
+            </div>
+            <div className='row'>
+            <div className='col-sm'>
+            <div className='form-group'>
+            <label className="form-label mt-4" for="lng">Enter Start Date</label>
+            <DatePicker
+              selected={startDate}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+              minDate={new Date('1981-01-03')}
+              maxDate={new Date('2021-05-29')}
+              onChange={date => {setStartDate(date)}}
+              placeholderText='Enter start date'
+              className='form-control'
+              />
+              {validStart?'':<div className="invalid-feedback">Enter valid date</div>}
+            </div>
+            <div className='form-group'>
+            <label className="form-label mt-4" for="lng">Enter End date</label>
+              <DatePicker
+                selected={endDate}
+                selectsEnd
+                startDate={startDate}
+                endDate={endDate}
+                minDate={startDate && new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate()+1)}
+                maxDate={new Date('2021-05-30')}
+                onChange={date => setEndDate(date)}
+                placeholderText='Enter End date'
+                className='form-control'
+              />
+              {validEnd?'':<div className="invalid-feedback">Enter valid date</div>}
+            </div>
+            </div>
+      </div>
+            <div className='form-group'>
+              {
+                (status===0)?
+                  <button onClick={handleSubmit} className="button form-control">Submit</button>
+                :(status===1)?
+                  <div className='loader'><PropagateLoader size={15}/></div>
+                :
+            <button 
+            className="button form-control" 
+            onClick={handleDownload}
+            >Downloads
+            </button>
+          }
+            </div>
+          </form>
+        </div>
+        </div> */
